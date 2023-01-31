@@ -4,7 +4,8 @@ import java.util.List;
 
 public interface EmployeeRepository {
 
-	List<Employee> findAll();
+    List<Employee> findAll();
 
-	Employee save(Employee e);
+    Employee save(Employee e);
+
 }
