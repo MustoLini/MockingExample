@@ -1,29 +1,41 @@
 package com.example;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 public class EmployeesIntegrationTest {
 
     EmployeeRepository employeeRepository= new EmployeeRepositoryImplementation();
-    BankService bankService= Mockito.mock(BankService.class);
+    BankService bankService= new BankServiceImplementation();
     private final Employees employees= new Employees(employeeRepository,bankService);
 
-    @BeforeEach
-    void setup(){
+
+    @Test
+    void payEmployees() {
         employeeRepository.save(new Employee("1",20000));
         employeeRepository.save(new Employee("2",20000));
         employeeRepository.save(new Employee("3",200000));
-    }
-    @Test
-    void payEmployees() {
         int numbersOfPayments =employees.payEmployees();
         assertEquals(3,numbersOfPayments);
     }
+    @Test
+    void testIfNoEmployees(){
+        int numberOfEmployees= employeeRepository.findAll().size();
+        assertEquals(0,numberOfEmployees);
+    }
+    @Test
+    void saveOneEmployee(){
+        employeeRepository.save(new Employee("1",20000));
+        assertEquals(1,employeeRepository.findAll().size());
+    }
+    @Test
+    void findIdForTheFirstInIndex(){
+        employeeRepository.save(new Employee("1",20000));
+        employeeRepository.save(new Employee("2",20000));
+        employeeRepository.save(new Employee("3",200000));
+        assertEquals("1",employeeRepository.findAll().get(0).getId());
+    }
+
+
+
 }
