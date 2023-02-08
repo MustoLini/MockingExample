@@ -35,6 +35,12 @@ public class EmployeesIntegrationTest {
         employeeRepository.save(new Employee("3",200000));
         assertEquals("1",employeeRepository.findAll().get(0).getId());
     }
+    @Test
+    void willOverWriteOneOfTheEmployees(){
+        employeeRepository.save(new Employee("1",2000));
+        employeeRepository.save(new Employee("1",3000));
+        assertEquals(1,employeeRepository.findAll().size());
+    }
 
 
 
