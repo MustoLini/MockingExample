@@ -32,9 +32,11 @@ class EmployeesUnitTest {
         verify(employee, times(1)).setPaid(true);
     }
     @Test
-    void testIfNoEmployees(){
-        int numberOfEmployees= employeeRepository.findAll().size();
-        assertEquals(0,numberOfEmployees);
+    void testIfOneEmployee(){
+        Employees employeesTestDubble = new Employees(employeeRepository, new BankServiceImplementation());
+        when(employeeRepository.findAll()).thenReturn(List.of(new Employee("1",3000)));
+        int numberOfEmployees= employeesTestDubble.payEmployees();
+        assertEquals(1,numberOfEmployees);
     }
 
 
