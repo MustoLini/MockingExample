@@ -7,7 +7,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -26,16 +25,14 @@ class EmployeesUnitTest {
     void payEmployees() {
         when(employeeRepository.findAll()).thenReturn(List.of(employee));
         when(employeeRepository.save(any(Employee.class))).then(returnsFirstArg());
-        int numbersOfPayments = employees.payEmployees();
-        assertEquals(1, numbersOfPayments);
+        assertEquals(1, employees.payEmployees());
         verify(employee, times(1)).getSalary();
         verify(employee, times(1)).setPaid(true);
     }
     @Test
     void testIfOneEmployee(){
-        Employees employeesTestDubble = new Employees(employeeRepository, new BankServiceImplementation());
         when(employeeRepository.findAll()).thenReturn(List.of(new Employee("1",3000)));
-        int numberOfEmployees= employeesTestDubble.payEmployees();
+        int numberOfEmployees= new Employees(employeeRepository, new BankServiceImplementation()).payEmployees();
         assertEquals(1,numberOfEmployees);
     }
 

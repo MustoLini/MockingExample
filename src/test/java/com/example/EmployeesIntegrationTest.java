@@ -15,8 +15,7 @@ public class EmployeesIntegrationTest {
         employeeRepository.save(new Employee("1",20000));
         employeeRepository.save(new Employee("2",20000));
         employeeRepository.save(new Employee("3",200000));
-        int numbersOfPayments =employees.payEmployees();
-        assertEquals(3,numbersOfPayments);
+        assertEquals(3, employees.payEmployees());
     }
     @Test
     void testIfNoEmployees(){
