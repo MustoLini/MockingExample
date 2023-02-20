@@ -1,30 +1,27 @@
 package com.example;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EmployeeRepositoryImplementation implements EmployeeRepository {
 
-    private Map<String, Employee> employees;
+    private List< Employee> employees;
 
     public EmployeeRepositoryImplementation() {
-        this.employees = new HashMap<>();
+        this.employees = new LinkedList<>();
     }
 
-    public EmployeeRepositoryImplementation(List<Employee> employees) {
-        this.employees = new HashMap<>();
-        employees.forEach(employee -> this.employees.put(employee.getId(), employee));
+    public EmployeeRepositoryImplementation(LinkedList<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
     public List<Employee> findAll() {
-        return employees.values().stream().toList();
+        return employees;
     }
 
     @Override
     public Employee save(Employee e) {
-        employees.put(e.getId(), e);
+        employees.add(e);
         return e;
     }
 }

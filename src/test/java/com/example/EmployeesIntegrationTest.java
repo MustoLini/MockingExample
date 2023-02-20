@@ -2,17 +2,15 @@ package com.example;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class EmployeesIntegrationTest {
 
     EmployeeRepository employeeRepository= new EmployeeRepositoryImplementation();
-    BankService bankService= Mockito.mock(BankService.class);
+    BankService bankService= mock(BankService.class);
     private final Employees employees= new Employees(employeeRepository,bankService);
 
     @BeforeEach

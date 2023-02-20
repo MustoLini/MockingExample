@@ -40,4 +40,11 @@ public class Employee {
 		return "Employee [id=" + id + ", salary=" + salary + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Employee){
+			return ((Employee) obj).getId().equals(getId());
+		}
+		return false;
+	}
 }
